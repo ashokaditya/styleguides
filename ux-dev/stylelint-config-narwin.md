@@ -11,6 +11,8 @@ A unified set of rules that help push the UXD team in the same direction for CSS
 ## Examples
 In order to see all the rules in [stylelint-config-narwin](https://github.com/DockYard/stylelint-config-narwin) look at the `index.js` file at [https://github.com/DockYard/stylelint-config-narwin/blob/master/index.js](https://github.com/DockYard/stylelint-config-narwin/blob/master/index.js)
 
+Further you can find documentation on the available Stylelint rules at [stylelint.io](https://stylelint.io/user-guide/rules/)
+
 ### Remove empty comments:
 The rule `"comment-no-empty": true,` will not allow any type of empty comments.
 
