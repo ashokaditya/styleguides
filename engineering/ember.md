@@ -15,32 +15,17 @@
 
 ### Import what you use, do not use globals
 
-For Ember Data, we should import `DS` from `ember-data`, and then
-destructure our desired modules.
-For Ember, use destructuring [as Ember's internal organization is
-not intuitive and difficult to grok, and we should wait until Ember has been
-correctly modularized.](https://github.com/ember-cli/ember-cli-shims/issues/53)
-
-[Here is the RFC on ES2015 modules](https://github.com/emberjs/rfcs/pull/68).
-
-Once Ember has officially adopted shims, we will prefer shims over
-destructuring.
+For Ember Data, we should import `Model`, `attr` and other ember-data modules
+from `ember-data`, and then destructure our desired modules.
+For Ember, we should only import those modules that will be used.
+Ember's imports can be found in the [JavaScript Module API RFC](https://github.com/emberjs/rfcs/blob/master/text/0176-javascript-module-api.md) and in the [Ember API docs](https://emberjs.com/api/ember/).
 
 ```javascript
 // Good
-
-import Ember from 'ember';
-import DS from 'ember-data';
-
-const {
-  computed,
-  computed: { alias }
-} = Ember;
-
-const {
-  Model,
-  attr
-} = DS;
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { computed } from '@ember/object';
+import { alias } from '@ember/object/computed';
 
 export default Model.extend({
   firstName: attr('string'),
@@ -54,6 +39,8 @@ export default Model.extend({
 });
 
 // Bad
+import Ember from 'ember';
+import DS from 'ember-data';
 
 export default DS.Model.extend({
   firstName: DS.attr('string'),
@@ -124,9 +111,7 @@ above, we still use `get`/`set`.
 
 ```js
 // Good
-import Ember from 'ember';
-
-const { get, set } = Ember;
+import { get, set } from '@ember/object';
 
 set(this, 'isSelected', true);
 get(this, 'isSelected');
@@ -236,17 +221,10 @@ Within each section, the attributes should be ordered alphabetically.
 
 ```js
 // Good
-
-import Ember from 'ember';
-import DS from 'ember-data';
-
-const { computed } = Ember;
-
-const {
-  Model,
-  attr,
-  hasMany
-} = DS;
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { hasMany } from 'ember-data/relationships';
+import { computed } from '@ember/object';
 
 export default Model.extend({
   // Attributes
@@ -263,17 +241,10 @@ export default Model.extend({
 });
 
 // Bad
-
-import Ember from 'ember';
-import DS from 'ember-data';
-
-const { computed } = Ember;
-
-const {
-  Model,
-  attr,
-  hasMany
-} = DS;
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
+import { hasMany } from 'ember-data/relationships';
+import { computed } from '@ember/object';
 
 export default Model.extend({
   children: hasMany('child'),
